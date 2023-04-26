@@ -41,14 +41,20 @@ def spin():
 def ready_check():
     done = True
     while done:
-        break_check = input("Ready to start next round? Y/N: ")
-        if break_check == "Y":
-            done = False
-        else:
-            time.sleep(600)
+        done_check = input("Are you done for the night? Y/N: ")
+        if done_check == "Y":
+            break
+        elif done_check == "N":
+            break_check = input("Ready to start next round? Y/N: ")
+            if break_check == "Y":
+                done = False
+            else:
+                time.sleep(600)
 
 
 def main():
+    current_time = time.time()
+    time.ctime(current_time)
     print("Start Working. Don't stress too much!")
     time.sleep(1200)
     media = vlc.MediaPlayer("C:\Projects\Productivity-Scripts\churchbells.wav")
