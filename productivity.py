@@ -49,8 +49,9 @@ def ready_check():
 
 
 def main():
+    print("Start Working. Don't stress too much!")
     time.sleep(1200)
-    media = vlc.MediaPlayer("C:\Projects\Productivity-Script\churchbells.wav")
+    media = vlc.MediaPlayer("C:\Projects\Productivity-Scripts\churchbells.wav")
     media.play()
     time.sleep(10)
     spin_result = spin()
