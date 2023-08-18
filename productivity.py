@@ -1,6 +1,7 @@
 import subprocess
 import pkg_resources
 import sys
+import linecache
 
 needed_packages = 'python-vlc'
 
@@ -16,7 +17,6 @@ def checker(needed_packages):
 
 checker(needed_packages)
 
-import os
 import random
 import time
 import vlc
@@ -51,15 +51,25 @@ def ready_check():
             else:
                 time.sleep(600)
 
+def motivational_quote():
+    lines = open('C:\Projects\Productivity-Scripts\quotes.txt')
+    linecount = lines.readlines()
+    linecount = len(linecount)
+    randquote = random.randrange(linecount)
+    random_quote = linecache.getline('C:\Projects\Productivity-Scripts\quotes.txt', randquote)
+    print(random_quote)
 
-def main():
-    current_time = time.time()
-    time.ctime(current_time)
-    print("Start Working. Don't stress too much!")
-    time.sleep(1200)
-    media = vlc.MediaPlayer("C:\Projects\Productivity-Scripts\churchbells.wav")
-    media.play()
-    time.sleep(10)
+def worktime():
+    timer = input('How much time in minutes would you like to work?')
+    timer = int(timer)
+    resting_time = (timer / 3)* 60
+    sleep_timer = timer * 60
+    times = [int(sleep_timer), int(resting_time)]
+    return times
+
+
+def rewards():
+
     spin_result = spin()
     print(spin_result)
     if spin_result != 'nothing':
@@ -68,6 +78,24 @@ def main():
     if spin_result == 'Two Spins':
         spin()
         spin()
+
+def timer():
+    current_time = time.time()
+    time.ctime(current_time)
+    motivational_quote()
+    sleep_timer = worktime()
+    time.sleep(times[0])
+    media = vlc.MediaPlayer("C:\Projects\Productivity-Scripts\churchbells.wav")
+    media.play()
+    time.sleep(10)
+
+def main():
+    work_type = input('Pomodoro or Reward Based Working?(Type Rewards to Select Rewards)')
+    if work_type == 'Pomodoro':
+        timer()
+    elif work_type == 'Rewards':
+        rewards()
+
 
 
 if __name__ == '__main__':
