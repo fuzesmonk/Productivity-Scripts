@@ -66,20 +66,25 @@ def worktime():
 #    Converting timer from minutes to seconds
     sleep_timer = timer * 60
     times = [int(sleep_timer), int(resting_time)]
-    return times
+    return times[int]
+
+
 
 def pomodoro(times):
     current_time = time.time()
     time.ctime(current_time)
     motivational_quote()
-    sleep_timer = worktime()
-    time.sleep(times)
+    sleep_timer = times[0]
+    time.sleep(sleep_timer)
     media = vlc.MediaPlayer("C:\Projects\Productivity-Scripts\churchbells.wav")
     media.play()
-    time.sleep(10)
+    time.sleep(times[1])
 
 def rewards() :
-    pomodoro()
+    sleep_timer = [0]
+    time.sleep(sleep_timer)
+    media = vlc.MediaPlayer("C:\Projects\Productivity-Scripts\churchbells.wav")
+    media.play()
     spin_result = spin()
     print(spin_result)
     if spin_result != 'nothing':
@@ -92,7 +97,7 @@ def rewards() :
 def main():
     work_type = input('Pomodoro or Reward Based Working?(Type Rewards to Select Rewards)')
     if work_type == 'Pomodoro':
-        timer()
+        pomodoro()
     elif work_type == 'Rewards':
         rewards()
 
