@@ -38,7 +38,7 @@ reward_chances = {
 def spin():
     return random.choices(list(reward_chances.keys()), list(reward_chances.values()))[0]
 
-def ready_check():
+def ready_check() :
     done = True
     while done:
         done_check = input("Are you done for the night? Y/N: ")
@@ -60,16 +60,26 @@ def motivational_quote():
     print(random_quote)
 
 def worktime():
-    timer = input('How much time in minutes would you like to work?')
+    timer = input('How much time in minutes would you like to work?\n')
     timer = int(timer)
-    resting_time = (timer / 3)* 60
+    resting_time = (timer / 3) * 60
+#    Converting timer from minutes to seconds
     sleep_timer = timer * 60
     times = [int(sleep_timer), int(resting_time)]
     return times
 
+def pomodoro(times):
+    current_time = time.time()
+    time.ctime(current_time)
+    motivational_quote()
+    sleep_timer = worktime()
+    time.sleep(times)
+    media = vlc.MediaPlayer("C:\Projects\Productivity-Scripts\churchbells.wav")
+    media.play()
+    time.sleep(10)
 
-def rewards():
-
+def rewards() :
+    pomodoro()
     spin_result = spin()
     print(spin_result)
     if spin_result != 'nothing':
@@ -78,16 +88,6 @@ def rewards():
     if spin_result == 'Two Spins':
         spin()
         spin()
-
-def timer():
-    current_time = time.time()
-    time.ctime(current_time)
-    motivational_quote()
-    sleep_timer = worktime()
-    time.sleep(times[0])
-    media = vlc.MediaPlayer("C:\Projects\Productivity-Scripts\churchbells.wav")
-    media.play()
-    time.sleep(10)
 
 def main():
     work_type = input('Pomodoro or Reward Based Working?(Type Rewards to Select Rewards)')
