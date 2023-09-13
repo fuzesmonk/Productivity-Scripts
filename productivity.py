@@ -44,12 +44,13 @@ def ready_check() :
         done_check = input("Are you done for the night? Y/N: ")
         if done_check == "Y":
             break
+            return done
         elif done_check == "N":
             break_check = input("Ready to start next round? Y/N: ")
             if break_check == "Y":
                 done = False
             else:
-                time.sleep(600)
+                time.sleep(30)
 
 def motivational_quote():
     lines = open('C:\Projects\Productivity-Scripts\quotes.txt')
@@ -80,8 +81,8 @@ def pomodoro(times):
     media.play()
     time.sleep(times[1])
 
-def rewards() :
-    sleep_timer = [0]
+def rewards(times) :
+    sleep_timer = times[0]
     time.sleep(sleep_timer)
     media = vlc.MediaPlayer("C:\Projects\Productivity-Scripts\churchbells.wav")
     media.play()
@@ -104,7 +105,8 @@ def main():
 
 
 if __name__ == '__main__':
-    while True:
+    done = True
+    while done:
         main()
 #   Check if break is done
         ready_check()

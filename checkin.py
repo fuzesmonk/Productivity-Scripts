@@ -36,13 +36,6 @@ def main():
             cont_work = ord(cont_work)
             if cont_work == ascii('Y'):
                 
-
-
-
-
-
-
-
         else:
             print('Format Error')
             break
